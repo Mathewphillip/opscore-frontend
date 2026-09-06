@@ -65,7 +65,7 @@ export default function OrderDetail() {
             <button className="btn btn-primary" onClick={() => handleAction('confirm')}>Confirm Order</button>
           )}
           {['DRAFT', 'CONFIRMED'].includes(order.status) && (
-            <button className="btn" style={{ backgroundColor: 'var(--color-error)', color: 'white' }} onClick={() => handleAction('cancel')}>Cancel Order</button>
+            <button className="btn" style={{ backgroundColor: 'var(--error)', color: 'white' }} onClick={() => handleAction('cancel')}>Cancel Order</button>
           )}
         </div>
       </div>
