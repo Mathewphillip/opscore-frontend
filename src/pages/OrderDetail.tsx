@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiClient } from '../api/apiClient';
+import toast from 'react-hot-toast';
 
 export default function OrderDetail() {
   const { id } = useParams();
@@ -38,12 +39,14 @@ export default function OrderDetail() {
   useEffect(() => { fetchOrder(); }, [id]);
 
   const handleAction = async (action: 'confirm' | 'cancel') => {
+    const toastId = toast.loading(`Processing ${action}...`);
     try {
       await apiClient.post(`/api/v1/orders/${id}/${action}/`);
+      toast.success(`Order ${action}ed successfully!`, { id: toastId });
       fetchOrder();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert('Action failed. Check console for details.');
+      toast.error(err.response?.data?.detail || err.response?.data?.[0] || 'Action failed.', { id: toastId });
     }
   };
 
@@ -54,8 +57,8 @@ export default function OrderDetail() {
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <button onClick={() => navigate('/orders')} style={{ background: 'none', border: 'none', color: 'var(--color-text-muted)', cursor: 'pointer', marginBottom: '0.5rem' }}>&larr; Back to Orders</button>
-          <h1>Order {order.order_number}</h1>
+          <button onClick={() => navigate('/orders')} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', marginBottom: '0.5rem' }}>&larr; Back to Orders</button>
+          <h1 className="page-title" style={{ marginBottom: 0 }}>Order {order.id.split('-')[0].toUpperCase()}</h1>
         </div>
         <div style={{ display: 'flex', gap: '1rem' }}>
           {order.status === 'DRAFT' && (
