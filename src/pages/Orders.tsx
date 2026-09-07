@@ -53,13 +53,10 @@ export default function Orders() {
                 <td style={{ padding: '0.75rem 1rem', fontWeight: 500, fontFamily: 'monospace' }}>{o.id.split('-')[0].toUpperCase()}</td>
                 <td style={{ padding: '0.75rem 1rem' }}>{new Date(o.created_at).toLocaleDateString()}</td>
                 <td style={{ padding: '1rem' }}>
-                  <span style={{ 
-                    padding: '0.25rem 0.5rem', 
-                    borderRadius: '999px', 
-                    fontSize: '0.8rem',
-                    backgroundColor: o.status === 'COMPLETED' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(79, 70, 229, 0.1)',
-                    color: o.status === 'COMPLETED' ? 'var(--color-success)' : 'var(--color-primary)'
-                  }}>
+                  <span className={`badge ${
+                    o.status === 'COMPLETED' || o.status === 'CONFIRMED' ? 'badge-success' : 
+                    o.status === 'CANCELLED' ? 'badge-error' : 'badge-primary'
+                  }`}>
                     {o.status}
                   </span>
                 </td>

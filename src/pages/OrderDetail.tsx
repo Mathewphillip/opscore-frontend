@@ -39,6 +39,7 @@ export default function OrderDetail() {
   useEffect(() => { fetchOrder(); }, [id]);
 
   const handleAction = async (action: 'confirm' | 'cancel') => {
+    if (action === 'cancel' && !window.confirm('Are you sure you want to cancel this order?')) return;
     const toastId = toast.loading(`Processing ${action}...`);
     try {
       await apiClient.post(`/api/v1/orders/${id}/${action}/`);
@@ -107,7 +108,12 @@ export default function OrderDetail() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--color-text-muted)' }}>Status</span>
-                <span style={{ fontWeight: 600 }}>{order.status}</span>
+                <span className={`badge ${
+                  order.status === 'COMPLETED' || order.status === 'CONFIRMED' ? 'badge-success' : 
+                  order.status === 'CANCELLED' ? 'badge-error' : 'badge-primary'
+                }`}>
+                  {order.status}
+                </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span style={{ color: 'var(--color-text-muted)' }}>Date</span>

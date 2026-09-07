@@ -56,13 +56,10 @@ export default function InvoiceDetail() {
           <h1>Invoice {invoice.invoice_number}</h1>
         </div>
         <div>
-          <span style={{ 
-            padding: '0.5rem 1rem', 
-            borderRadius: '999px', 
-            fontWeight: 600,
-            backgroundColor: invoice.status === 'PAID' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-            color: invoice.status === 'PAID' ? 'var(--color-success)' : 'var(--color-error)'
-          }}>
+          <span className={`badge ${
+            invoice.status === 'PAID' ? 'badge-success' : 
+            invoice.status === 'CANCELLED' ? 'badge-error' : 'badge-primary'
+          }`}>
             {invoice.status}
           </span>
         </div>

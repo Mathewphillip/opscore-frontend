@@ -43,7 +43,14 @@ export default function Invoices() {
                 <td style={{ padding: '1rem', fontWeight: 500 }}>{inv.invoice_number}</td>
                 <td style={{ padding: '1rem', color: 'var(--text-muted)', fontFamily: 'monospace' }}>{inv.order.split('-')[0].toUpperCase()}</td>
                 <td style={{ padding: '1rem' }}>{new Date(inv.issued_at).toLocaleDateString()}</td>
-                <td style={{ padding: '1rem' }}>{inv.status}</td>
+                <td style={{ padding: '1rem' }}>
+                  <span className={`badge ${
+                    inv.status === 'PAID' ? 'badge-success' : 
+                    inv.status === 'CANCELLED' ? 'badge-error' : 'badge-primary'
+                  }`}>
+                    {inv.status}
+                  </span>
+                </td>
                 <td style={{ padding: '1rem', textAlign: 'right' }}>${parseFloat(inv.total_amount).toFixed(2)}</td>
                 <td style={{ padding: '1rem', textAlign: 'right' }}>
                   <Link to={`/invoices/${inv.id}`} style={{ fontWeight: 600 }}>View & Pay</Link>
