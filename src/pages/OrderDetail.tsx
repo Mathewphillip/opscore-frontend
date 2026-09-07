@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiClient } from '../api/apiClient';
 import toast from 'react-hot-toast';
+import ConfirmDialog from '../components/ConfirmDialog';
 
 export default function OrderDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [order, setOrder] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [showCancelDialog, setShowCancelDialog] = useState(false);
 
   const fetchOrder = async () => {
     try {
@@ -39,7 +41,15 @@ export default function OrderDetail() {
   useEffect(() => { fetchOrder(); }, [id]);
 
   const handleAction = async (action: 'confirm' | 'cancel') => {
-    if (action === 'cancel' && !window.confirm('Are you sure you want to cancel this order?')) return;
+    if (action === 'cancel') {
+      setShowCancelDialog(true);
+      return;
+    }
+    executeAction(action);
+  };
+
+  const executeAction = async (action: 'confirm' | 'cancel') => {
+    setShowCancelDialog(false);
     const toastId = toast.loading(`Processing ${action}...`);
     try {
       await apiClient.post(`/api/v1/orders/${id}/${action}/`);
@@ -127,6 +137,14 @@ export default function OrderDetail() {
           </div>
         </div>
       </div>
+
+      <ConfirmDialog
+        isOpen={showCancelDialog}
+        title="Cancel Order"
+        message="Are you sure you want to cancel this order? This action cannot be undone."
+        onConfirm={() => executeAction('cancel')}
+        onCancel={() => setShowCancelDialog(false)}
+      />
     </div>
   );
 }
