@@ -1,28 +1,28 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
+  --text: #000000;
+  --text-h: #000000;
   --font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   
   /* Color Palette */
-  --bg-app: #f4f7f9;
+  --bg-app: #ffffff;
   --bg-surface: #ffffff;
   
-  --text-main: #1e293b;
-  --text-muted: #64748b;
+  --text-main: #000000;
+  --text-muted: #666666;
   
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --primary: #000000;
+  --primary-hover: #333333;
+  --primary-gradient: #000000;
   
-  --sidebar-bg: #0f172a;
-  --sidebar-text: #94a3b8;
+  --sidebar-bg: #000000;
+  --sidebar-text: #cccccc;
   --sidebar-text-hover: #ffffff;
-  --sidebar-active-bg: rgba(255, 255, 255, 0.1);
+  --sidebar-active-bg: rgba(255, 255, 255, 0.2);
   
-  --border-light: #e2e8f0;
+  --border-light: #cccccc;
   
-  --success: #10b981;
-  --error: #ef4444;
+  --success: green;
+  --error: red;
   
   /* Shadows & Radius */
   --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -88,12 +88,12 @@ a:hover {
 .btn-primary {
   background: var(--primary);
   color: white;
-  box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
 }
 
 /* Cards */
@@ -135,7 +135,7 @@ input, select, textarea {
 input:focus, select:focus, textarea:focus {
   border-color: var(--primary);
   background-color: var(--bg-surface);
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Layout */
@@ -164,7 +164,7 @@ input:focus, select:focus, textarea:focus {
 .sidebar-brand {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #c4b5fd;
+  color: #ffffff;
   letter-spacing: -0.02em;
 }
 
@@ -210,7 +210,7 @@ input:focus, select:focus, textarea:focus {
   gap: 0.75rem;
   padding: 0.85rem 1.25rem;
   background: transparent;
-  color: #f87171;
+  color: var(--error);
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -221,8 +221,8 @@ input:focus, select:focus, textarea:focus {
 }
 
 .btn-logout:hover {
-  background-color: rgba(239, 68, 68, 0.1);
-  color: #fca5a5;
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
 }
 
 /* Main Content Area */
@@ -282,11 +282,11 @@ tbody tr:hover {
 }
 
 .badge-primary {
-  background-color: rgba(79, 70, 229, 0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   color: var(--primary);
 }
 
 .badge-error {
-  background-color: rgba(239, 68, 68, 0.1);
+  background-color: rgba(255, 0, 0, 0.1);
   color: var(--error);
 }
